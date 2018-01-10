@@ -1,19 +1,14 @@
-import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
+import {LocalStorageService} from 'angular-2-local-storage';
 
-/**
- * Generated class for the KangListPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
-  selector: 'page-kang-list',
-  templateUrl: 'kang-list.html',
+    selector: 'page-kang-list',
+    templateUrl: 'kang-list.html',
 })
 export class KangListPage {
 
@@ -27,9 +22,13 @@ export class KangListPage {
     nb_url = "http://kyungjoon.ipdisk.co.kr:5000/r_list?receipeName=강식당 레시피&page=";
     cloud_url = 'http://checkout002-191623.appspot.com/r_list?receipeName=강식당 레시피&page=';
 
+    saved_items: any = [];
+
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
+        , private toastCtrl: ToastController
         , public loadingCtrl: LoadingController
+        , public localstorageservice: LocalStorageService
         , private   iab: InAppBrowser) {
 
         let loading = this.loadingCtrl.create({
@@ -41,7 +40,7 @@ export class KangListPage {
 
 
             let receipesList = res.result.blog_list;
-            console.log('#####################' + JSON.stringify(receipesList));
+            //console.log('#####################' + JSON.stringify(receipesList));
             this.results = receipesList;
             this.totalCount = res.result.count;
 
@@ -50,7 +49,11 @@ export class KangListPage {
             this.page = this.page + 1;
             loading.dismissAll()
 
-        })
+        });
+        let _tempSavedItems = this.localstorageservice.get('savedReceipe');
+        Array.prototype.push.apply(this.saved_items, _tempSavedItems);
+
+
     }
 
     doInfinite(infiniteScroll) {
@@ -86,7 +89,25 @@ export class KangListPage {
     }
 
 
+
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
+        this.saved_items.push(item);
+        this.localstorageservice.set('savedReceipe', this.saved_items);
+        this.presentToast();
+    }
+
+    presentToast() {
+        let toast = this.toastCtrl.create({
+            message: '찜 되었습니다~~!',
+            duration: 1500,
+            position: 'top'
+        });
+
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+
+        toast.present();
     }
 }

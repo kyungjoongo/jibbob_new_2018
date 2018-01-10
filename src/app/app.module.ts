@@ -19,24 +19,31 @@ import { NbListPage} from "../pages/nb-list/nb-list";
 import { HbListPage} from "../pages/hb-list/hb-list";
 import { KangListPage} from "../pages/kang-list/kang-list";
 import { YoonListPage} from "../pages/yoon-list/yoon-list";
+import { LocalStorageModule } from 'angular-2-local-storage';
+import { JjimListPage} from "../pages/jjim-list/jjim-list";
+
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         BlogReceipe,
-         ReceipeListPage,AboutPage, NbListPage,HbListPage, KangListPage,YoonListPage
+         ReceipeListPage,AboutPage, NbListPage,HbListPage, KangListPage,YoonListPage, JjimListPage
     ],
     imports: [
         HttpModule,
         BrowserModule,HttpClientModule,
         IonicModule.forRoot(MyApp),
+        LocalStorageModule.withConfig({
+            prefix: 'my-app001',
+            storageType: 'localStorage'
+        })
     ],
     bootstrap: [IonicApp],
     entryComponents: [
         MyApp,
         HomePage,
-        BlogReceipe, ReceipeListPage,AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage
+        BlogReceipe, ReceipeListPage,AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage, JjimListPage
     ],
 
 

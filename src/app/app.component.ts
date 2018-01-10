@@ -10,6 +10,7 @@ import {NbListPage} from "../pages/nb-list/nb-list";
 import {HbListPage} from "../pages/hb-list/hb-list";
 import {KangListPage} from "../pages/kang-list/kang-list";
 import {YoonListPage} from "../pages/yoon-list/yoon-list";
+import {JjimListPage} from "../pages/jjim-list/jjim-list";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {YoonListPage} from "../pages/yoon-list/yoon-list";
 })
 export class MyApp {
     @ViewChild(Nav) nav: Nav;
-    rootPage: any = BlogReceipe;
+    rootPage: any = KangListPage;
     //rootPage: any = TitleHolderPage
 
     pages: Array<{ title: string, component: any }>;
@@ -57,10 +58,11 @@ export class MyApp {
         this.pages = [
             /*{title: 'Fight Card', component: HomePage},*/
             {title: '백종원 레시피', component: BlogReceipe}
-            ,{title: '냉장고를부탁해 레시피', component: NbListPage}
-            ,{title: '혼밥 레시피', component: HbListPage}
             ,{title: '강식당 레시피', component: KangListPage}
             ,{title: '윤식당 레시피', component: YoonListPage}
+            ,{title: '혼밥 레시피', component: HbListPage}
+            ,{title: '냉장고를부탁해 레시피', component: NbListPage}
+            ,{title: '찜한 레시피', component: JjimListPage}
             ,{title: '앱정보', component: AboutPage}
             /*, {title: 'Upcomming Fight Card', component: FightCard2Page}*/
 

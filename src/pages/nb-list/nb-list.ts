@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
+import {LocalStorageService} from "angular-2-local-storage";
 
 /**
  * Generated class for the NbListPage page.
@@ -12,10 +13,11 @@ import {HttpClient} from "@angular/common/http";
 
 @IonicPage()
 @Component({
-  selector: 'page-nb-list',
-  templateUrl: 'nb-list.html',
+    selector: 'page-nb-list',
+    templateUrl: 'nb-list.html',
 })
 export class NbListPage {
+    saved_items: any = [];
     results: any = [];
     title: string;
     totalCount: number = 0;
@@ -29,6 +31,8 @@ export class NbListPage {
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
         , public loadingCtrl: LoadingController
+        , public localstorageservice: LocalStorageService
+        , private toastCtrl: ToastController
         , private   iab: InAppBrowser) {
 
         let loading = this.loadingCtrl.create({
@@ -50,6 +54,9 @@ export class NbListPage {
             loading.dismissAll()
 
         })
+
+        let _tempSavedItems = this.localstorageservice.get('savedReceipe');
+        Array.prototype.push.apply(this.saved_items, _tempSavedItems);
     }
 
     doInfinite(infiniteScroll) {
@@ -84,9 +91,25 @@ export class NbListPage {
         var browser = this.iab.create(url, '_blank', 'location=no,toolbar=yes');
     }
 
-
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
+        this.saved_items.push(item);
+        this.localstorageservice.set('savedReceipe', this.saved_items);
+        this.presentToast();
+    }
+
+    presentToast() {
+        let toast = this.toastCtrl.create({
+            message: '찜 되었습니다~~!',
+            duration: 1500,
+            position: 'top'
+        });
+
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+
+        toast.present();
     }
 
 }

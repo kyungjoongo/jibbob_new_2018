@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
+import {LocalStorageService} from "angular-2-local-storage";
 
 
 @IonicPage()
@@ -10,7 +11,7 @@ import {HttpClient} from "@angular/common/http";
   templateUrl: 'hb-list.html',
 })
 export class HbListPage {
-
+    saved_items: any = [];
     results: any = [];
     title: string;
     totalCount: number = 0;
@@ -23,6 +24,7 @@ export class HbListPage {
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
         , public loadingCtrl: LoadingController
+        , public localstorageservice: LocalStorageService
         , private   iab: InAppBrowser) {
 
         let loading = this.loadingCtrl.create({
@@ -44,6 +46,9 @@ export class HbListPage {
             loading.dismissAll()
 
         })
+
+        let _tempSavedItems = this.localstorageservice.get('savedReceipe');
+        Array.prototype.push.apply(this.saved_items, _tempSavedItems);
     }
 
     doInfinite(infiniteScroll) {
@@ -78,10 +83,10 @@ export class HbListPage {
         this.iab.create(url, '_blank', 'location=no,toolbar=yes');
     }
 
-
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
+        this.saved_items.push(item);
+        this.localstorageservice.set('savedReceipe', this.saved_items);
     }
-
 
 }

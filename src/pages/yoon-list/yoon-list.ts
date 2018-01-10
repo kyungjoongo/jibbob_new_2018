@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
+import {LocalStorageService} from "angular-2-local-storage";
 
 /**
  * Generated class for the YoonListPage page.
@@ -27,9 +28,12 @@ export class YoonListPage {
     selectedIndex = [];
     nb_url = "http://kyungjoon.ipdisk.co.kr:5000/r_list?receipeName=윤식당 레시피&page=";
     cloud_url = 'http://checkout002-191623.appspot.com/r_list?receipeName=윤식당 레시피&page=';
+    saved_items: any = [];
+    fetched_items: any = [];
 
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
+        , public localstorageservice: LocalStorageService
         , public loadingCtrl: LoadingController
         , private   iab: InAppBrowser) {
 
@@ -52,6 +56,9 @@ export class YoonListPage {
             loading.dismissAll()
 
         })
+
+        let _tempSavedItems = this.localstorageservice.get('savedReceipe');
+        Array.prototype.push.apply(this.saved_items, _tempSavedItems);
     }
 
     doInfinite(infiniteScroll) {
@@ -87,7 +94,11 @@ export class YoonListPage {
     }
 
 
+
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
+        this.saved_items.push(item);
+        this.localstorageservice.set('savedReceipe', this.saved_items);
+
     }
 }

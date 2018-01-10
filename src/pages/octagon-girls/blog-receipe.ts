@@ -3,6 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams} from 'ionic-angu
 import {HttpProvider} from "../../providers/http/http";
 import {HttpClient} from "@angular/common/http";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {LocalStorageService} from "angular-2-local-storage";
 
 
 
@@ -19,13 +20,15 @@ export class BlogReceipe {
     totalPage = 0;
     selectedIndex = [];
 
-    /*cloud_url = 'http://checkout-express.appspot.com/jibbob_list/1';
+    nb_url = "http://kyungjoon.ipdisk.co.kr:5000/r_list?receipeName=백종원 레시피&page=";
+    cloud_url = 'http://checkout002-191623.appspot.com/r_list?receipeName=백종원 레시피&page=';
 
-    cloud_url = 'http://checkout002-191623.appspot.com/jibbob_list/';*/
+    saved_items: any = [];
 
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
         , public loadingCtrl: LoadingController
+        , public localstorageservice: LocalStorageService
         , private   iab: InAppBrowser) {
 
         let loading = this.loadingCtrl.create({
@@ -33,7 +36,7 @@ export class BlogReceipe {
             spinner: 'dots'
         });
         loading.present();
-        this.httpclient.get('http://checkout-express.appspot.com/jibbob_blog_list/' + this.page).subscribe((res: any) => {
+        this.httpclient.get(this.cloud_url + this.page).subscribe((res: any) => {
 
 
             let receipesList = res.result.blog_list;
@@ -47,6 +50,9 @@ export class BlogReceipe {
             loading.dismissAll()
 
         })
+
+        let _tempSavedItems = this.localstorageservice.get('savedReceipe');
+        Array.prototype.push.apply(this.saved_items, _tempSavedItems);
     }
 
     doInfinite(infiniteScroll) {
@@ -57,7 +63,7 @@ export class BlogReceipe {
             return false;
         } else {
 
-            this.httpclient.get('http://checkout-express.appspot.com/jibbob_blog_list/' + this.page).subscribe((res: any) => {
+            this.httpclient.get(this.cloud_url + this.page).subscribe((res: any) => {
                 console.log('###############' + this.page);
                 let receipesList = res.result.blog_list;
                 for (let i = 0; i < receipesList.length; i++) {
@@ -84,5 +90,7 @@ export class BlogReceipe {
 
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
+        this.saved_items.push(item);
+        this.localstorageservice.set('savedReceipe', this.saved_items);
     }
 }
