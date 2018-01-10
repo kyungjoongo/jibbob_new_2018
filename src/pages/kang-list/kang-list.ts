@@ -101,7 +101,7 @@ export class KangListPage {
         let toast = this.toastCtrl.create({
             message: '찜 되었습니다~~!',
             duration: 1500,
-            position: 'top'
+            position: 'bottom'
         });
 
         toast.onDidDismiss(() => {
