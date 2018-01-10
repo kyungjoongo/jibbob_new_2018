@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-navbar color="danger">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Fight Card</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+
+    <ion-card class="blurred-title-card" *ngFor="let card of result">
+        <div class="card-image" (click)="goFightCard(card.id)"
+             [style.background-image]="'url(' + card.secondary_feature_image + ')'"></div>
+
+
+        <div class="card-title-background">
+            <span [style.background-image]="'url(' + card.secondary_feature_image + ')'"></span>
+        </div>
+
+
+        <div class="card-title" (click)="goFightCard(card.id)" style="color: white">
+            <p class="font_Spectral">
+
+                <ion-col col-6="">
+
+                    {{card.base_title}}
+
+                    {{card.title_tag_line}} &nbsp;&nbsp;&nbsp;
+                </ion-col>
+                <br/>
+                <ion-col>
+
+                    &nbsp;
+                    <br>
+                    <div *ngIf="card.event_time_text; else elseBlock">({{card.event_time_zone_text}})
+                        {{card.event_dategmt | slice:0:10}} {{card.event_time_text}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <ng-template #elseBlock>TBD&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;</ng-template>
+
+
+                </ion-col>
+            </p>
+        </div>
+    </ion-card>
+</ion-content>

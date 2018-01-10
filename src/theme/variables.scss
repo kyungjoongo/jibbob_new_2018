@@ -1,0 +1,132 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+@import "ionic.globals";
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+
+
+$colors: (
+    primary: #488aff,
+    secondary: #32db64,
+    danger: #f53d3d,
+    light: #f4f4f4,
+    yellow: #ffe85f,
+    dark: #222,
+    black : black,
+    green  : green
+);
+
+@import "ionic.theme.default";
+
+@import "ionic.ionicons";
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
+@import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,600');
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+.font_Fjalla {
+    font-family: 'Fjalla One', sans-serif;
+}
+
+
+.font_Spectral {
+    font-family: 'Spectral SC', serif;
+}
+
+body {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+
+
+.breeSerif {
+    /*font-family: 'Bree Serif', serif;*/
+}
+
+.no-padding {
+    padding: 0 !important;
+    /*margin: 0px!important;*/
+}
+
+.gray {
+    padding: 0px !important;
+    background-color: lightgray !important;
+}
+
+ion-content {
+    font-family: 'Hanna', serif!important;
+}
+
+
+.hanna, ion-navbar, .toolbar-title-md{
+    font-family: 'Hanna', serif!important;
+}
+
+ion-navbar {
+    font-family: 'Bree Serif', serif !important;
+
+}
+
+
+
+.home {
+
+    scroll-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    ion-grid {
+        padding: 0;
+        height: 100%;
+    }
+
+    ion-row {
+        flex: 1;
+        /*border: solid black thin;*/
+        border-color: black;
+        padding: 0px;
+        text-align: center;
+
+    }
+
+}
+
+$infinite-scroll-loading-color: green;
+
+$navbar-md-height : 30px;
+
+ion-toolbar{
+    height: 20px!important;
+}
+.md {
+    ion-navbar.toolbar {
+        min-height: 30px;
+    }
+    ion-toolbar{
+        min-height: 40px!important;
+        /*height: 30px;*/
+    }
+}
+
+
+
+
+

@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-navbar color="primary" class="hanna">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Receipe List</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="home">
+{{totalCount}}<br/>
+    {{totalPage}}
+    <div *ngFor="let item of results" style="background: rgba(0,0,0,0);" (click)="clickedItem(item.href)">
+        <ion-row style="text-align: center" >
+            <ion-col col-12 style="text-align: center!important;" >
+                <h2>{{item.title | uppercase }}</h2>
+            </ion-col>
+            <ion-col col-12="">
+                <div *ngIf="item.image != null; else elseBlock">
+                    <img [src]="item.image" />
+                </div>
+                <ng-template #elseBlock>
+                    no-image
+                </ng-template>
+
+            </ion-col>
+        </ion-row>
+
+    </div>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+
+</ion-content>

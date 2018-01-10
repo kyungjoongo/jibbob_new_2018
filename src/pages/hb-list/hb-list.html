@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar color="primary" class="hanna">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>혼밥 레시피</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content class="home">
+
+    <div class="card001" *ngFor="let item of results; let i= index"
+         style="background: rgba(0,0,0,0);padding: 0px!important;">
+
+        <ion-row style="text-align: center; padding: 0px;">
+            <ion-col col-12 style="padding: 0px;">
+
+                <div *ngIf="item.image != null; else elseBlock">
+                    <img class="" [src]="item.image" (click)="clickedItem(item.href)" />
+                </div>
+                <ng-template #elseBlock>
+                    <img src="http://via.placeholder.com/360x360"/>
+                </ng-template>
+                <div class="text001" >
+                    {{item.title | uppercase }}
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <button color='dark' ion-button icon-left clear small (click)="clickedHeart(item, i)">
+                    <ion-icon name="thumbs-up" [ngClass]="{'heart': selectedIndex[i]}"></ion-icon>
+                    <div [ngClass]="{'heart': selectedIndex[i]}">Likes</div>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button color="dark" ion-button icon-left clear small>
+                    <ion-icon name="text"></ion-icon>
+                    <div> Comments</div>
+                </button>
+            </ion-col>
+            <!-- <ion-col center text-center>
+                 <ion-note>
+                     11h ago
+                 </ion-note>
+             </ion-col>-->
+        </ion-row>
+
+    </div>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+</ion-content>
