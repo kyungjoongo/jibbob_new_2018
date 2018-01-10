@@ -17,13 +17,15 @@ import {ReceipeListPage} from "../pages/fight-event-list/receipe-list";
 import { AboutPage} from "../pages/about/about";
 import { NbListPage} from "../pages/nb-list/nb-list";
 import { HbListPage} from "../pages/hb-list/hb-list";
+import { KangListPage} from "../pages/kang-list/kang-list";
+import { YoonListPage} from "../pages/yoon-list/yoon-list";
 
 @NgModule({
     declarations: [
         MyApp,
         HomePage,
         BlogReceipe,
-         ReceipeListPage,AboutPage, NbListPage,HbListPage
+         ReceipeListPage,AboutPage, NbListPage,HbListPage, KangListPage,YoonListPage
     ],
     imports: [
         HttpModule,
@@ -34,7 +36,7 @@ import { HbListPage} from "../pages/hb-list/hb-list";
     entryComponents: [
         MyApp,
         HomePage,
-        BlogReceipe, ReceipeListPage,AboutPage, NbListPage, HbListPage
+        BlogReceipe, ReceipeListPage,AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage
     ],
 
 

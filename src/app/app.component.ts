@@ -8,6 +8,8 @@ import {ReceipeListPage} from "../pages/fight-event-list/receipe-list";
 import {AboutPage} from "../pages/about/about";
 import {NbListPage} from "../pages/nb-list/nb-list";
 import {HbListPage} from "../pages/hb-list/hb-list";
+import {KangListPage} from "../pages/kang-list/kang-list";
+import {YoonListPage} from "../pages/yoon-list/yoon-list";
 
 
 @Component({
@@ -57,6 +59,8 @@ export class MyApp {
             {title: '백종원 레시피', component: BlogReceipe}
             ,{title: '냉장고를부탁해 레시피', component: NbListPage}
             ,{title: '혼밥 레시피', component: HbListPage}
+            ,{title: '강식당 레시피', component: KangListPage}
+            ,{title: '윤식당 레시피', component: YoonListPage}
             ,{title: '앱정보', component: AboutPage}
             /*, {title: 'Upcomming Fight Card', component: FightCard2Page}*/
 
