@@ -127,33 +127,6 @@ export class KangListPage {
 
 
     initializeApp() {
-        if(this.platform.is('cordova') ) {
-            this.platform.ready().then(() => {
-                let admobid = {
-                    interstitial: 'ca-app-pub-6826082357124500/9307296734',
-                    banner: 'ca-app-pub-6826082357124500/7593091515'
-                };
-
-                this.admob.prepareInterstitial({
-                    adId: admobid.interstitial,
-                    isTesting: false
-                    , autoShow: true
-
-                }).then(()=>{
-                    this.admob.createBanner({
-                        adId: admobid.banner,
-                        isTesting: false,
-                        autoShow: true,
-                        position: this.admob.AD_POSITION.BOTTOM_CENTER
-                    })
-                })
-
-                /*this.admob.showInterstitial();*/
-
-
-            });
-        }
-
 
     }
 

@@ -43,18 +43,20 @@ export class CommentPage {
     }
 
     getProducts() {
-      /*  let loading = this.loadingCtrl.create({
+        let loading = this.loadingCtrl.create({
             content: 'Please wait...',
             spinner: 'dots'
         });
 
-        loading.present();*/
+        loading.present();
         this.products = this.afd.list('receipe_' + this.title);
 
-        /*setTimeout(()=>{
+        setTimeout(()=>{
             loading.dismissAll()
-        },500)*/
+        },500)
     }
+
+
 
     deleteItem(item) {
         let userData: any = this.localstorageservice.get('userData');
