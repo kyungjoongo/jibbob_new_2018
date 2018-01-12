@@ -1,0 +1,70 @@
+page-comment {
+
+    .chat-bubble {
+        border-radius: 5px;
+        display: inline-block;
+        padding: 10px 18px;
+        position: relative;
+        margin: 10px;
+        max-width: 100%;
+    }
+
+    .chat-bubble:before {
+        content: "\00a0";
+        display: block;
+        height: 16px;
+        width: 9px;
+        position: absolute;
+        bottom: -7.5px;
+    }
+
+    .chat-bubble.left {
+        background-color: #e6e5eb;
+        float: left;
+        margin-left: 5px;
+    }
+
+    .chat-bubble.left:before {
+        background-color: #e6e5eb;
+        left: 10px;
+        -webkit-transform: rotate(70deg) skew(5deg);
+    }
+
+    .chat-bubble.right {
+        background-color: #158ffe;
+        color: #fff;
+        float: right;
+        margin-right: 55px;
+    }
+
+    .chat-bubble.right:before {
+        background-color: #158ffe;
+        right: 10px;
+        -webkit-transform: rotate(118deg) skew(-5deg);
+    }
+
+    .chat-bubble.right a.autolinker {
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .text_top {
+        position: relative;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
+        font-weight: bold;
+        color: white;
+        font: bold 14px/22px Helvetica, Sans-Serif;
+        letter-spacing: -1px;
+        background: rgb(0, 0, 0); /* fallback color */
+        background: rgba(0, 0, 0, 0.4);
+        padding: 10px;
+    }
+
+    .fab001{
+        position: fixed;
+        bottom: 0px;
+        right:5px;
+    }
+}

@@ -3,6 +3,7 @@ import {IonicPage, LoadingController, NavController, NavParams, ToastController}
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
 import {LocalStorageService} from "angular-2-local-storage";
+import {CommentPage} from "../comment/comment";
 
 /**
  * Generated class for the NbListPage page.
@@ -110,6 +111,13 @@ export class NbListPage {
         });
 
         toast.present();
+    }
+    goComment(item) {
+        let _title = item.title;
+        _title = _title.replace("#", "").replace("$", "").replace("$", "");
+        _title = _title.replace("[", "");
+        _title = _title.replace("]", "");
+        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.image})
     }
 
 }

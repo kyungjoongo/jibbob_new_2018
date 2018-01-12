@@ -4,6 +4,7 @@ import {HttpProvider} from "../../providers/http/http";
 import {HttpClient} from "@angular/common/http";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {LocalStorageService} from "angular-2-local-storage";
+import {CommentPage} from "../comment/comment";
 
 
 
@@ -93,4 +94,14 @@ export class BlogReceipe {
         this.saved_items.push(item);
         this.localstorageservice.set('savedReceipe', this.saved_items);
     }
+
+
+    goComment(item) {
+        let _title = item.title;
+        _title = _title.replace("#", "").replace("$", "").replace("$", "");
+        _title = _title.replace("[", "");
+        _title = _title.replace("]", "");
+        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.image})
+    }
+
 }

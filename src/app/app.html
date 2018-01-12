@@ -1,16 +1,27 @@
 <ion-menu [content]="content">
-    <ion-header >
+    <ion-header>
         <ion-toolbar color="green" style="height: 20px!important;">
-            <ion-title>집밥레시피 </ion-title>
+            <ion-title>집밥레시피 {{myDate}}</ion-title>
         </ion-toolbar>
     </ion-header>
 
 
     <!--leftmenu-->
     <ion-content class="breeSerif">
+        <div style="text-align: center; border-bottom: 1px solid green;">
+            <br/>
+            <div *ngIf="userImage;else elseBlock">
+                <img [src]="userImage" style="width: 70px;height: 70px;"><br/>
+                {{userName}}
+            </div>
+            <ng-template #elseBlock>
+                <img src="assets/imgs/avatar01.png" style="width: 70px;height: 70px;">
+            </ng-template>
+        </div>
+
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-                {{p.title}}
+                {{p.title}} &nbsp; <ion-icon name={{p.icon}}></ion-icon>
             </button>
         </ion-list>
     </ion-content>

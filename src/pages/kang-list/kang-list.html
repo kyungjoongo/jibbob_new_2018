@@ -9,6 +9,9 @@
 
 
 <ion-content class="home">
+    <div class="my-overlay" padding [hidden]="overlayHidden">
+        <button full (click)="hideOverlay()">Click me</button>
+    </div>
 
     <div class="card001" *ngFor="let item of results; let i= index"
          style="background: rgba(0,0,0,0);padding: 0px!important;">
@@ -36,7 +39,7 @@
                 </button>
             </ion-col>
             <ion-col>
-                <button color="dark" ion-button icon-left clear small>
+                <button color="dark" ion-button icon-left clear small (click)="goComment(item)">
                     <ion-icon name="text"></ion-icon>
                     <div> Comments</div>
                 </button>
@@ -49,6 +52,7 @@
         </ion-row>
 
     </div>
+
 
     <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
         <ion-infinite-scroll-content loadingSpinner="dots"></ion-infinite-scroll-content>

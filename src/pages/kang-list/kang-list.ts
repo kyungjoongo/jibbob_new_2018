@@ -1,8 +1,14 @@
 import {Component} from '@angular/core';
-import {IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+    IonicPage, LoadingController, NavController, NavParams, Platform, PopoverController,
+    ToastController
+} from 'ionic-angular';
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {HttpClient} from "@angular/common/http";
 import {LocalStorageService} from 'angular-2-local-storage';
+import {CommentPage} from "../comment/comment";
+import {CommonServiceProvider} from "../../providers/common-service/common-service";
+import {AdMobPro} from "@ionic-native/admob-pro";
 
 
 @IonicPage()
@@ -23,13 +29,21 @@ export class KangListPage {
     cloud_url = 'http://checkout002-191623.appspot.com/r_list?receipeName=강식당 레시피&page=';
 
     saved_items: any = [];
+    overlayHidden: boolean = true;
 
     constructor(public navCtrl: NavController, public navParams: NavParams
         , public httpclient: HttpClient
         , private toastCtrl: ToastController
         , public loadingCtrl: LoadingController
         , public localstorageservice: LocalStorageService
+        , public popoverCtrl: PopoverController
+        , public platform: Platform
+        , private admob: AdMobPro
+        , public commonserviceprovider: CommonServiceProvider
         , private   iab: InAppBrowser) {
+
+
+        this.initializeApp();
 
         let loading = this.loadingCtrl.create({
             content: 'Please wait...',
@@ -89,7 +103,6 @@ export class KangListPage {
     }
 
 
-
     clickedHeart(item, index) {
         this.selectedIndex[index] = !this.selectedIndex[index]
         this.saved_items.push(item);
@@ -109,5 +122,49 @@ export class KangListPage {
         });
 
         toast.present();
+
     }
+
+
+    initializeApp() {
+        if(this.platform.is('cordova') ) {
+            this.platform.ready().then(() => {
+                let admobid = {
+                    interstitial: 'ca-app-pub-6826082357124500/9307296734',
+                    banner: 'ca-app-pub-6826082357124500/7593091515'
+                };
+
+                this.admob.prepareInterstitial({
+                    adId: admobid.interstitial,
+                    isTesting: false
+                    , autoShow: true
+
+                }).then(()=>{
+                    this.admob.createBanner({
+                        adId: admobid.banner,
+                        isTesting: false,
+                        autoShow: true,
+                        position: this.admob.AD_POSITION.BOTTOM_CENTER
+                    })
+                })
+
+                /*this.admob.showInterstitial();*/
+
+
+            });
+        }
+
+
+    }
+
+
+    goComment(item) {
+        let _title = item.title;
+        _title = _title.replace("#", "").replace("$", "").replace("$", "");
+        _title = _title.replace("[", "");
+        _title = _title.replace("]", "");
+        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.image})
+    }
+
+
 }

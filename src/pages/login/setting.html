@@ -1,0 +1,55 @@
+<ion-header>
+    <ion-navbar color="dark" class="hanna">
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>설정</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <!-- <button ion-button="" (click)="btnLogin()" color="facebook" full><ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> &nbsp; Login with facebook</button>-->
+
+    <!--<button ion-button="" (click)="btnLogout()">btnLogout</button>-->
+
+
+    <div *ngIf="userData; else elseBlock">
+        <ion-card >
+            <ion-card-header>
+                <div style="text-align: center"><h3> 유저 정보</h3></div>
+            </ion-card-header>
+
+            <img [src]="userData.picture" style=""/>
+            <ion-card-content>
+                <p>{{ userData.username }}</p>
+                <p>Email: {{ userData.email }}</p>
+                <p>First Name: {{ userData.first_name }}</p>
+            </ion-card-content>
+        </ion-card>
+        <button ion-button="" (click)="btnLogout()" color="danger" full>
+            <ion-icon ios="logo-facebook" md="logo-facebook"></ion-icon> &nbsp; 페이스북 로그아웃
+        </button>
+    </div>
+
+    <ng-template #elseBlock>
+        <ion-card >
+            <ion-card-header>
+                <div style="text-align: center"> 유저 정보</div>
+            </ion-card-header>
+            <img src="assets/imgs/avatar01.png"/>
+            <ion-card-content>
+                <p>아무개</p>
+                <p>Email: </p>
+                <p>First Name: </p>
+            </ion-card-content>
+        </ion-card>
+    </ng-template>
+
+    <button ion-button="" (click)="exitApp()" color="dark" full>
+        <ion-icon name="exit"></ion-icon> &nbsp;앱종료
+    </button>
+
+
+
+</ion-content>

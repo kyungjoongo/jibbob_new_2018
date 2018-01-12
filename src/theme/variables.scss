@@ -25,7 +25,8 @@ $colors: (
     green  : green,
     bora : #503380,
     yoon : #5f67ff,
-    clova : #6bffd1
+    clova : #6bffd1,
+    facebook : #3b5998
 );
 
 @import "ionic.theme.default";
@@ -116,6 +117,9 @@ $infinite-scroll-loading-color: green;
 
 $navbar-md-height : 30px;
 
+$popover-md-width: 400px;
+$popover-md-min-width :450px;
+
 ion-toolbar{
     height: 20px!important;
 }
@@ -164,6 +168,12 @@ ion-toolbar{
 .heart{
     color: red;
 }
+
+/*팝업창크기*/
+$alert-min-width : 340px;
+$alert-max-height : 100%;
+
+
 
 
 

@@ -1,0 +1,58 @@
+<!--
+  Generated template for the CommentPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="clova">
+        <ion-title>레시피 평가^^
+        </ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content style="padding: 0px;margin: 0px">
+
+    <ion-title text-wrap="" class="text_top" style="height: 50px!important; margin: 0px;padding: 0px;">
+        <ion-row style="height: 30px!important; margin: 0px;padding: 0px;">
+            <ion-col col-1="">
+                <img [src]="image" style="height: 30px;width: 40px;"/>
+            </ion-col>
+            <ion-col col-11="" style="align-items: baseline">
+                {{title}}
+            </ion-col>
+        </ion-row>
+
+    </ion-title>
+    <ion-list>
+        <ion-item-sliding #item *ngFor="let product of products | async">
+            <ion-item>
+
+
+                <ion-avatar item-left><img [src]="product.picture"/></ion-avatar>
+                {{product.comment}}
+
+                <div item-right="">
+                    {{product.date | amLocal | amDateFormat: 'YYYY-MM-DD HH:mm' }}
+                </div>
+
+
+            </ion-item>
+            <ion-item-options side="right">
+                <button color="danger" ion-button (click)="deleteItem(product)">
+                    <ion-icon name="trash"></ion-icon>
+                    삭제
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+
+    <ion-fab class="fab001">
+        <button (click)="clickedFab()" ion-fab mini>
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
+</ion-content>
