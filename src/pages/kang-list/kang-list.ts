@@ -43,7 +43,10 @@ export class KangListPage {
         , private   iab: InAppBrowser) {
 
 
-        this.initializeApp();
+        if (!this.navParams.get('fromNavBar')){
+            this.getAdMob();
+        }
+
 
         let loading = this.loadingCtrl.create({
             content: 'Please wait...',
@@ -125,9 +128,37 @@ export class KangListPage {
 
     }
 
+    /*       Runs when the page has loaded.
+            This event only happens once per page being created.
+             If a page leaves but is cached, then this event will not fire again on a subsequent viewing.
+             The ionViewDidLoad event is good place to put your setup code for the page.
+     */
+    getAdMob() {
 
-    initializeApp() {
+        this.platform.ready().then(() => {
 
+            if (this.platform.is('cordova')) {
+
+                let admobid = {
+                    interstitial: 'ca-app-pub-6826082357124500/9307296734',
+                    banner: 'ca-app-pub-6826082357124500/7593091515'
+                };
+
+                this.admob.prepareInterstitial({
+                    adId: admobid.interstitial,
+                    isTesting: false
+                    , autoShow: true
+
+                }).then(() => {
+                    this.admob.createBanner({
+                        adId: admobid.banner,
+                        isTesting: false,
+                        autoShow: true,
+                        position: this.admob.AD_POSITION.BOTTOM_CENTER
+                    })
+                })
+            }
+        });
     }
 
 
