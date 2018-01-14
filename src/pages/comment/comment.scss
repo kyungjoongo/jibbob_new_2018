@@ -48,23 +48,19 @@ page-comment {
         font-weight: bold;
     }
 
-    .text_top {
-        position: relative;
-        bottom: 0px;
-        left: 0;
-        width: 100%;
-        font-weight: bold;
-        color: white;
-        font: bold 14px/22px Helvetica, Sans-Serif;
-        letter-spacing: -1px;
-        background: rgb(0, 0, 0); /* fallback color */
-        background: rgba(0, 0, 0, 0.4);
-        padding: 10px;
-    }
+
 
     .fab001{
         position: fixed;
         bottom: 0px;
         right:5px;
+    }
+
+    ion-content{
+        font-family: "‘Noto Sans KR’";
+    }
+
+    .banner001{
+        font-family: "‘Noto Sans KR’";
     }
 }

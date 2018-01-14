@@ -4,8 +4,7 @@ import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {HttpModule} from "@angular/http";
 import {MyApp} from './app.component';
 import {HomePage} from '../pages/home/home';
-
-import {BlogReceipe} from "../pages/octagon-girls/blog-receipe";
+import {BaekReceipePage} from "../pages/baek-list/baek-receipe";
 import {HttpClientModule} from "@angular/common/http";
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
@@ -29,6 +28,7 @@ import {AngularFireDatabase} from "angularfire2/database-deprecated";
 import {MomentModule} from 'angular2-moment';
 import {CommonServiceProvider} from '../providers/common-service/common-service';
 import {LoginMainPage} from "../pages/login-main/login-main";
+import { GooglePlus } from '@ionic-native/google-plus';
 
 // AF2 Settings
 export const firebaseConfig = {
@@ -44,7 +44,7 @@ export const firebaseConfig = {
     declarations: [
         MyApp,
         HomePage,
-        BlogReceipe,
+        BaekReceipePage,
         AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage, JjimListPage, CommentPage, Setting, LoginMainPage
     ],
     imports: [
@@ -62,7 +62,7 @@ export const firebaseConfig = {
     entryComponents: [
         MyApp,
         HomePage,
-        BlogReceipe, AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage, JjimListPage, CommentPage, Setting
+        BaekReceipePage, AboutPage, NbListPage, HbListPage, KangListPage, YoonListPage, JjimListPage, CommentPage, Setting
         , LoginMainPage
     ],
 
@@ -71,7 +71,7 @@ export const firebaseConfig = {
         StatusBar, YoutubeVideoPlayer, AdMobPro,
         SplashScreen, HttpProvider, InAppBrowser, /*AngularFireDatabase,*/
         {provide: ErrorHandler, useClass: IonicErrorHandler}, Facebook, AngularFireDatabase,
-        CommonServiceProvider
+        CommonServiceProvider, GooglePlus
     ]
 })
 export class AppModule {

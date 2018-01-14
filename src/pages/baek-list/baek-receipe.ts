@@ -13,14 +13,14 @@ import {AdMobPro} from "@ionic-native/admob-pro";
 
 @IonicPage()
 @Component({
-    selector: 'page-hb-list',
+    selector: 'page-baek-list',
     template:`
         <ion-header>
-            <ion-navbar color="green" class="">
+            <ion-navbar color="clova" class="">
                 <button ion-button menuToggle>
                     <ion-icon name="menu"></ion-icon>
                 </button>
-                <ion-title>혼밥 레시피</ion-title>
+                <ion-title>백종원 레시피</ion-title>
             </ion-navbar>
         </ion-header>
 
@@ -72,7 +72,7 @@ import {AdMobPro} from "@ionic-native/admob-pro";
 
     `
 })
-export class HbListPage {
+export class BaekReceipePage {
 
 
     results: any = [];
@@ -82,9 +82,9 @@ export class HbListPage {
     totalPage = 0;
     selectedIndex = [];
 
-    naver_url = "https://checkout002-191623.appspot.com/blog_list?query=혼밥 레시피&page=";
+    naver_url = "https://checkout002-191623.appspot.com/blog_list?query=백종원 부탁해 레시피&page=";
 
-    local_naver_url = "http://kyungjoon.ipdisk.co.kr:5000/blog_list?query=혼밥 레시피&page=";
+    local_naver_url = "http://kyungjoon.ipdisk.co.kr:5000/blog_list?query=백종원 부탁해 레시피&page=";
 
     saved_items: any = [];
     overlayHidden: boolean = true;

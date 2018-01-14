@@ -23,11 +23,17 @@ export class Setting {
         , private fb: Facebook) {
 
         if(this.platform.is('cordova') ) {
-            this.fb.getLoginStatus().then(response => {
+
+
+            if( this.localstorageservice.get('userData')){
+                this.userData = this.localstorageservice.get('userData');
+            }
+
+            /*this.fb.getLoginStatus().then(response => {
                 if (response.status == 'connected') {
-                    this.userData = this.localstorageservice.get('userData');
+
                 }
-            })
+            })*/
         }else{
             console.log('###############코도바아님');
         }

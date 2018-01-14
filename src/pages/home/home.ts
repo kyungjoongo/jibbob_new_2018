@@ -23,14 +23,6 @@ export class HomePage {
                 , private   iab: InAppBrowser) {
 
 
-        this.loadingImgDiv.present();
-        this.httpProvider.getJsonData().subscribe(response => {
-            this.result = response.result;
-
-            this.loadingImgDiv.dismiss();
-        });
-
-
     }
 
     goFightCard(eventId) {

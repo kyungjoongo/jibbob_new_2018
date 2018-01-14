@@ -26,9 +26,6 @@ export class JjimListPage {
     totalPage = 0;
     selectedIndex: Array<boolean> = new Array();
 
-    nb_url = 'http://localhost:5000/nb_list/';
-
-    cloud_url = 'http://checkout002-191623.appspot.com/nb_list/';
     saved_items: any = [];
 
     constructor(public navCtrl: NavController, public navParams: NavParams
@@ -88,7 +85,10 @@ export class JjimListPage {
         _title = _title.replace("#", "").replace("$", "").replace("$", "");
         _title = _title.replace("[", "");
         _title = _title.replace("]", "");
-        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.image})
+        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.thumbnail})
     }
+
+
+
 
 }

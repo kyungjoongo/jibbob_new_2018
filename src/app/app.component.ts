@@ -2,7 +2,7 @@ import {Component, ViewChild} from '@angular/core';
 import {AlertController, Events, Nav, Platform, ToastController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {BlogReceipe} from "../pages/octagon-girls/blog-receipe";
+import {BaekReceipePage} from "../pages/baek-list/baek-receipe";
 import {AdMobPro} from "@ionic-native/admob-pro";
 import {AboutPage} from "../pages/about/about";
 import {NbListPage} from "../pages/nb-list/nb-list";
@@ -40,12 +40,12 @@ export class MyApp {
         // used for an example of ngFor and navigation
         this.pages = [
             /*{title: 'Fight Card', component: HomePage},*/
-            {title: '백종원 레시피', component: BlogReceipe, icon: ''}
+            {title: '백종원 레시피', component: BaekReceipePage, icon: ''}
             , {title: '강식당 레시피', component: KangListPage, icon: ''}
             , {title: '윤식당 레시피', component: YoonListPage, icon: ''}
             , {title: '혼밥 레시피', component: HbListPage, icon: ''}
             , {title: '냉장고를부탁해 레시피', component: NbListPage, icon: ''}
-            , {title: '좋아요한 레시피', component: JjimListPage, icon: 'thumbs-up'}
+            , {title: '찜한 레시피', component: JjimListPage, icon: 'thumbs-up'}
             , {title: '설정', component: Setting, icon: 'gear'}
             , {title: '앱정보', component: AboutPage, icon: ''}
 
@@ -54,14 +54,12 @@ export class MyApp {
 
         events.subscribe('user:logined', (user: any, time) => {
 
-            // alert(date);
-
             let userData: any = this.localstorageservice.get('userData');
             if (userData != null) {
 
                 this.userImage = userData.picture;
-                this.userName = userData.first_name;
-
+                this.userName = userData.username
+                ;
                 this.nav.setRoot(KangListPage)
             } else {
                 this.userImage = 'assets/imgs/avatar01.png';
@@ -116,21 +114,6 @@ export class MyApp {
         });
         this.alert.present();
     }
-
-    showToast() {
-        let toast = this.toastCtrl.create({
-            message: 'Press Again to exit',
-            duration: 2000,
-            position: 'bottom'
-        });
-
-        toast.onDidDismiss(() => {
-            console.log('Dismissed toast');
-        });
-
-        toast.present();
-    }
-
 
     initializeApp() {
 

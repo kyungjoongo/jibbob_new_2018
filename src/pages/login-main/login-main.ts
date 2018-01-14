@@ -3,6 +3,10 @@ import {Events, IonicPage, Nav, NavController, NavParams} from 'ionic-angular';
 import {LocalStorageService} from "angular-2-local-storage";
 import {Facebook, FacebookLoginResponse} from "@ionic-native/facebook";
 import {KangListPage} from "../kang-list/kang-list";
+import {GooglePlus} from "@ionic-native/google-plus";
+import * as firebase from "firebase";
+import {Setting} from "../login/setting";
+import {HbListPage} from "../hb-list/hb-list";
 
 /**
  * Generated class for the LoginMainPage page.
@@ -13,8 +17,8 @@ import {KangListPage} from "../kang-list/kang-list";
 
 @IonicPage()
 @Component({
-  selector: 'page-login-main',
-  templateUrl: 'login-main.html',
+    selector: 'page-login-main',
+    templateUrl: 'login-main.html',
 })
 export class LoginMainPage {
 
@@ -22,7 +26,7 @@ export class LoginMainPage {
     @ViewChild(Nav) nav: Nav;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public localstorageservice: LocalStorageService
-        , public events: Events
+        , public events: Events, private googlePlus: GooglePlus
         , private fb: Facebook) {
 
 
@@ -30,7 +34,7 @@ export class LoginMainPage {
 
     userData: any;
 
-    btnSkipLogin(){
+    btnSkipLogin() {
         this.localstorageservice.set('userData', null);
         this.navCtrl.setRoot(KangListPage)
     }
@@ -63,6 +67,43 @@ export class LoginMainPage {
 
             alert('애러네요~');
         })
+
+
+    }
+
+
+    btnLoginWithGoogle() {
+
+        this.googlePlus.login({})
+            .then(res => {
+
+                let result: any = res;
+/*
+                "email":"kyungjoon.go@gmail.com",
+                    "userId":"102641092158743392976",
+                    "displayName":"고경준","
+                familyName":"고","givenName":"경준",
+                "imageUrl":"https://lh6.googleusercontent.com/-c_H7quNiIpQ/AAAAAAAAAAI/AAAAAAAAF6Q/-qHLz3BOo-I/photo.jpg"}
+*/
+                console.log(JSON.stringify(res));
+
+                this.userData = {
+                    email: result.email
+                    , first_name: result.familyName
+                    , picture: result.imageUrl
+                    , username: result.displayName
+                    , user_id: result.userId
+                };
+
+                this.localstorageservice.set('userData', this.userData);
+                this.events.publish('user:logined', this.userData, Date.now());
+
+
+            }).catch(err => {
+
+                alert(JSON.stringify(err));
+            console.error(err)
+        });
 
 
     }

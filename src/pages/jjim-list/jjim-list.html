@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar color="clova" class="hanna">
+    <ion-navbar color="blue" class="hanna">
 
         <button ion-button menuToggle>
             <ion-icon name="menu"></ion-icon>
@@ -9,7 +9,7 @@
 </ion-header>
 
 
-<ion-content class="home">
+<ion-content padding="">
 
     <div *ngIf="results.length == 0; else elseBlock ">
         <ion-row>
@@ -21,18 +21,21 @@
     <ng-template #elseBlock>
         <div class="card001" *ngFor="let item of results; let i= index"
              style="background: rgba(0,0,0,0);padding: 0px!important;">
-
             <ion-row style="text-align: center; padding: 0px;">
-                <ion-col col-12 style="padding: 0px;">
+                <ion-col col-3 style="padding: 0px;">
 
-                    <div *ngIf="item.image != null; else elseBlock">
-                        <img class="" [src]="item.image" (click)="clickedItem(item.href)"/>
+                    <div *ngIf="item.thumbnail != null; else elseBlock">
+                        <ion-avatar><img class="" [src]="item.thumbnail"  (click)="clickedItem(item.url)" /></ion-avatar>
                     </div>
                     <ng-template #elseBlock>
                         <img src="http://via.placeholder.com/360x360"/>
                     </ng-template>
-                    <div class="text001">
-                        {{item.title | uppercase }}
+
+                </ion-col>
+                <ion-col col-9 (click)="clickedItem(item.url)">
+                    <div >
+
+                        <div [innerHTML]="item.title"></div>
                     </div>
                 </ion-col>
             </ion-row>

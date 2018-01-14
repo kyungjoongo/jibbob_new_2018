@@ -26,7 +26,9 @@ $colors: (
     bora : #503380,
     yoon : #5f67ff,
     clova : #6bffd1,
-    facebook : #3b5998
+    facebook : #3b5998,
+    google : #d34836,
+    blue : blue
 );
 
 @import "ionic.theme.default";
@@ -41,6 +43,7 @@ $colors: (
 @import url('https://fonts.googleapis.com/css?family=Spectral+SC:400,600');
 @import url('https://fonts.googleapis.com/css?family=Bree+Serif');
 @import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 .font_Fjalla {
     font-family: 'Fjalla One', sans-serif;
@@ -75,12 +78,14 @@ body {
 }
 
 ion-content {
-    font-family: 'Hanna', serif!important;
+    font-family: ‘Noto Sans KR’ !important;
 }
 
 
 .hanna, ion-navbar, .toolbar-title-md{
-    font-family: 'Hanna', serif!important;
+    font-family: "‘Noto Sans KR’";
+    font-weight: bolder;
+
 }
 
 ion-navbar {
@@ -167,6 +172,22 @@ ion-toolbar{
 
 .heart{
     color: red;
+}
+.notosans{
+    font-family: 'Hanna', serif!important;
+}
+
+.text_top {
+    position: relative;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    color: white;
+    font-family: ‘Noto Sans KR’;
+    letter-spacing: -1px;
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
 }
 
 /*팝업창크기*/

@@ -24,6 +24,7 @@
         "@ionic-native/admob-pro": "^4.5.2",
         "@ionic-native/core": "4.3.3",
         "@ionic-native/facebook": "^4.5.2",
+        "@ionic-native/google-plus": "^4.5.2",
         "@ionic-native/in-app-browser": "^4.5.2",
         "@ionic-native/splash-screen": "4.3.3",
         "@ionic-native/status-bar": "4.3.3",
@@ -37,6 +38,7 @@
         "cordova-plugin-device": "^1.1.7",
         "cordova-plugin-extension": "^1.5.3",
         "cordova-plugin-facebook4": "^1.9.1",
+        "cordova-plugin-googleplus": "^5.2.1",
         "cordova-plugin-inappbrowser": "^1.7.2",
         "cordova-plugin-ionic-webview": "^1.1.16",
         "cordova-plugin-splashscreen": "^4.1.0",
@@ -73,6 +75,9 @@
             "cordova-plugin-facebook4": {
                 "APP_ID": "18980271336",
                 "APP_NAME": "kyungjoon"
+            },
+            "cordova-plugin-googleplus": {
+                "REVERSED_CLIENT_ID": "com.googleusercontent.apps.574875960059-c0mthgqaheaba85im5mqvum55bui029p"
             }
         },
         "platforms": [

@@ -7,7 +7,7 @@
 <ion-header>
 
     <ion-navbar color="clova">
-        <ion-title>레시피 평가^^
+        <ion-title>레시피 평가
         </ion-title>
     </ion-navbar>
 
@@ -15,13 +15,13 @@
 
 <ion-content style="padding: 0px;margin: 0px">
 
-    <ion-title text-wrap="" class="text_top" style="height: 50px!important; margin: 0px;padding: 0px;">
+    <ion-title text-wrap="" class="banner001" style="height: 50px!important; margin: 0px;padding: 0px;">
         <ion-row style="height: 30px!important; margin: 0px;padding: 0px;">
-            <ion-col col-1="">
-                <img [src]="image" style="height: 30px;width: 40px;"/>
-            </ion-col>
-            <ion-col col-11="" style="align-items: baseline">
-                {{title}}
+           <!-- <ion-col col-1="">
+                <img [src]="image" style="height: 40px;width: 50px;"/>
+            </ion-col>-->
+            <ion-col class="text001" col-12 style="text-align: center;font-family: '‘Noto Sans KR’'" text-wrap="">
+                <div [innerHTML]="title" text-wrap=""></div>
             </ion-col>
         </ion-row>
 
@@ -29,8 +29,6 @@
     <ion-list>
         <ion-item-sliding #item *ngFor="let product of products | async">
             <ion-item>
-
-
                 <ion-avatar item-left><img [src]="product.picture"/></ion-avatar>
                 {{product.comment}}
 

@@ -30,6 +30,8 @@ export class CommentPage {
         this.title = this.navParams.get('title');
         this.image = this.navParams.get('image');
 
+        //alert(this.image);
+
         this.msg = {
             content: 'Am I dreaming?',
             position: 'left',

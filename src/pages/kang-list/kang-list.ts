@@ -14,7 +14,66 @@ import {AdMobPro} from "@ionic-native/admob-pro";
 @IonicPage()
 @Component({
     selector: 'page-kang-list',
-    templateUrl: 'kang-list.html',
+    template:`
+        <ion-header>
+            <ion-navbar color="danger" class="">
+                <button ion-button menuToggle>
+                    <ion-icon name="menu"></ion-icon>
+                </button>
+                <ion-title>강식당 레시피</ion-title>
+            </ion-navbar>
+        </ion-header>
+        
+        
+
+
+        <ion-content class="home">
+            <div class="my-overlay" padding [hidden]="overlayHidden">
+                <button full (click)="hideOverlay()">Click me</button>
+            </div>
+
+            <div class="card001" *ngFor="let item of results; let i= index"
+                 style="background: rgba(0,0,0,0);padding: 0px!important;">
+
+                <ion-row style="text-align: center; padding: 0px;">
+                    <ion-col col-12 style="padding: 0px;">
+
+                        <div *ngIf="item.thumbnail != ''; else elseBlock">
+                            <img class="" [src]="item.thumbnail" style="width: 360px;height: 360px;" (click)="clickedItem(item.url)" />
+                        </div>
+                        <ng-template #elseBlock>
+                            <img src="http://via.placeholder.com/360x360"/>
+                        </ng-template>
+                        <div class="text001" >
+                            <div [innerHTML]="item.title"></div>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+
+                <ion-row>
+                    <ion-col>
+                        <button color='dark' ion-button icon-left clear small (click)="clickedHeart(item, i)">
+                            <ion-icon name="thumbs-up" [ngClass]="{'heart': selectedIndex[i]}"></ion-icon>
+                            <div [ngClass]="{'heart': selectedIndex[i]}">Likes</div>
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button color="dark" ion-button icon-left clear small (click)="goComment(item)">
+                            <ion-icon name="text"></ion-icon>
+                            <div> Comments</div>
+                        </button>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="500px">
+                <ion-infinite-scroll-content loadingSpinner="dots" ></ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
+
+        </ion-content>
+
+    `
 })
 export class KangListPage {
 
@@ -25,8 +84,10 @@ export class KangListPage {
     page: number = 1;
     totalPage = 0;
     selectedIndex = [];
-    nb_url = "http://kyungjoon.ipdisk.co.kr:5000/r_list?receipeName=강식당 레시피&page=";
-    cloud_url = 'http://checkout002-191623.appspot.com/r_list?receipeName=강식당 레시피&page=';
+
+    naver_url = "https://checkout002-191623.appspot.com/blog_list?query=강식당 레시피&page=";
+
+    local_naver_url = "http://kyungjoon.ipdisk.co.kr:5000/blog_list?query=강식당 레시피&page=";
 
     saved_items: any = [];
     overlayHidden: boolean = true;
@@ -43,7 +104,7 @@ export class KangListPage {
         , private   iab: InAppBrowser) {
 
 
-        if (!this.navParams.get('fromNavBar')){
+        if (!this.navParams.get('fromNavBar')) {
             this.getAdMob();
         }
 
@@ -53,16 +114,10 @@ export class KangListPage {
             spinner: 'dots'
         });
         loading.present();
-        this.httpclient.get(this.cloud_url + this.page).subscribe((res: any) => {
+        this.httpclient.get(this.naver_url + this.page).subscribe((res: any) => {
 
-
-            let receipesList = res.result.blog_list;
-            //console.log('#####################' + JSON.stringify(receipesList));
+            let receipesList = res;
             this.results = receipesList;
-            this.totalCount = res.result.count;
-
-            this.totalPage = Math.ceil(this.totalCount / 10);
-
             this.page = this.page + 1;
             loading.dismissAll()
 
@@ -75,29 +130,16 @@ export class KangListPage {
 
     doInfinite(infiniteScroll) {
 
+        this.httpclient.get(this.naver_url + this.page).subscribe((res: any) => {
+            console.log('###############' + this.page);
+            let receipesList = res;
+            for (let i = 0; i < receipesList.length; i++) {
+                this.results.push(receipesList[i]);
+            }
+            this.page = this.page + 1;
 
-        if (this.totalPage < this.page) {
             infiniteScroll.complete();
-            return false;
-        } else {
-
-            this.httpclient.get(this.cloud_url + this.page).subscribe((res: any) => {
-                console.log('###############' + this.page);
-                let receipesList = res.result.blog_list;
-                for (let i = 0; i < receipesList.length; i++) {
-                    this.results.push(receipesList[i]);
-                }
-                this.page = this.page + 1;
-
-                infiniteScroll.complete();
-
-
-            })
-
-
-        }
-
-
+        })
     }
 
 
@@ -128,11 +170,6 @@ export class KangListPage {
 
     }
 
-    /*       Runs when the page has loaded.
-            This event only happens once per page being created.
-             If a page leaves but is cached, then this event will not fire again on a subsequent viewing.
-             The ionViewDidLoad event is good place to put your setup code for the page.
-     */
     getAdMob() {
 
         this.platform.ready().then(() => {
@@ -167,8 +204,15 @@ export class KangListPage {
         _title = _title.replace("#", "").replace("$", "").replace("$", "");
         _title = _title.replace("[", "");
         _title = _title.replace("]", "");
-        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.image})
+        this.navCtrl.push(CommentPage, {'title': _title, 'image': item.thumbnail}).then(()=>{
+
+        }).catch(err=>{
+            alert(err);
+        })
     }
+
+
+
 
 
 }
